@@ -50,7 +50,7 @@ return (
             <button  onClick={handleBack} className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-300">
                 Back
             </button>
-            <div className="transition-transform duration-500 ease-out transform scale-100">
+            <div className="transition-transform flex  w-full h-full duration-500 ease-out transform scale-100">
                 {PopupComponent}
             </div>
         </div>

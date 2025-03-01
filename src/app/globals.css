@@ -26,6 +26,10 @@ body {
 
   /* *########### container */
   .container {
-    @apply bg-white px-10 max-w-[1000px] h-[1200px] mx-auto md:grid md:grid-cols-3 md:grid-rows-3  ;
+    @apply bg-white px-2 md:px-10 max-w-[1000px] h-[1200px] mx-auto md:grid md:grid-cols-3 md:grid-rows-3  ;
+  }
+  /* *########### pop-up */
+  .pop-up {
+    @apply w-[80%] h-[80%] bg-black flex 
   }
 }
