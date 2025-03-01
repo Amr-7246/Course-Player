@@ -4,7 +4,7 @@ import Video from "./Components/Video";
 import CourseMaterials from "./Components/CourseMaterials";
 import CourseTopics from "./Components/CourseTopics";
 import Comments from "./Components/Comments";
-import PopUp from "./Components/PopUp";
+import PopUpTemplate from "./Components/PopUp/PopUpTemplate";
 
 export default function Home() {
   return (
@@ -15,8 +15,8 @@ export default function Home() {
       <CourseMaterials/>
       <CourseTopics/>
       <Comments/>
-      {/* <PopUp/> */}
     </div>
+      <PopUpTemplate/>
     </>
   );
 }
