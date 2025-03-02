@@ -114,9 +114,9 @@ const Video = () => {
   return (
     <div
       className={`
-        ${isPlaying ? "sticky top-0" : "relative"}
+        ${isPlaying ? "sticky bg-white shadow-lg w-full rounded-lg duration-500 shadow-stone-600  top-0" : "relative"}
         md:mb-10 w-full min-h-[400px] p-5 flex flex-wrap items-center justify-center gap-2 
-        md:col-span-2 row-span-1 row-start-1 row-end-2
+        md:col-span-2 row-span-1 row-start-1 row-end-2 
       `}
     >
       {/* Video Section */}
