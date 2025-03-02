@@ -1,11 +1,15 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import { FaBook, FaFileCode, FaTasks, FaPlayCircle } from "react-icons/fa";
+import { GiPadlock } from "react-icons/gi";
+import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
 import useStore from "../context/useStore";
 
 const CourseTopics = () => {
   // * Start Hooks 
   const [progress, setProgress] = useState(0);
+  const [IsOppend, setIsOppend] = useState(false);
   const fakeProgress = 75;
   const { dispatch } = useStore();
   // * End Hooks 
@@ -78,8 +82,12 @@ const CourseTopics = () => {
             key={topicIndex}
             className="bg-white border border-stone-500 w-full p-4 rounded-lg"
           >
-            <h2 className="text-xl font-semibold text-gray-700 mb-3">
+            <h2 className=" flex justify-between items-center text-xl font-semibold text-gray-700 mb-3">
               {topic.week}
+              <div  className=" flex items-center justify-center md:hidden cursor-pointer border border-transparent duration-500 rounded-full w-[30px] h-[30px] hover:border-stone-950 " >
+                <span onClick={ ()=> setIsOppend(!IsOppend) } className= {` ${IsOppend ? 'opacity-0 z-0 absolute ' : 'opacity-1 z-5 ' } duration-500 `} ><FaPlus/></span>
+                <span onClick={ ()=>setIsOppend(!IsOppend) } className= {` ${IsOppend ? 'opacity-1 z-5':'opacity-0 z-0 absolute ' } duration-500 `} ><FaMinus/></span>
+              </div>
             </h2>
             <ul className="space-y-2">
               {topic.details.map((detail, i) => {
@@ -104,4 +112,4 @@ const CourseTopics = () => {
   );
 };
 
-export default CourseTopics;
+export default CourseTopics;
