@@ -15,7 +15,7 @@ const CourseMaterials = () => {
   ];
 
   return (
-    <div className="w-full  p-5 col-span-2 col-start-1 col-end-3 row-span-1 row-start-2 row-end-3">
+    <div className="course-materials">
       <h1 className="font-black  text-black mb-4">Course Material</h1>
       <div className="shadow-lg  shadow-stone-500 rounded-lg bg-white w-full min-h-[200px] p-4">
         {courses.map(course => (

@@ -5,13 +5,16 @@ import { GiPadlock } from "react-icons/gi";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import useStore from "../context/useStore";
+import { useVideo } from "../context/VideoContext";
 
-const CourseTopics = () => {
+
+const CourseTopics: React.FC = () => {
   // * Start Hooks 
   const [progress, setProgress] = useState(0);
   const [IsOppend, setIsOppend] = useState(false);
   const fakeProgress = 75;
   const { dispatch } = useStore();
+  const { isFullScreenForLargeS } = useVideo();
   // * End Hooks 
   // * Start Fake Data 
     const topics = [
@@ -66,7 +69,7 @@ const CourseTopics = () => {
     // &  updateing Context state 
   // * Start Logic 
   return (
-    <div className="w-fit px-6 md:px-0 py-6 shadow-lg rounded-lg col-span-1 col-start-3 col-end-4 row-span-3 row-start-1 row-end-4">
+    <div className={` course-topics ${isFullScreenForLargeS ? '   row-start-2 row-end-5  ' : 'row-start-1 row-end-5  ' } `}>
       {/* header */}
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Course Topics</h1>
       {/* header */}

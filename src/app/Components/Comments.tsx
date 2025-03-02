@@ -54,7 +54,7 @@ const Comments = () => {
   };
   // * logic 
   return (
-    <div className='w-full col-span-2 col-start-1 col-end-3 row-span-1 row-start-3 row-end-4 p-4'>
+    <div className='comments'>
       {/* Head */}
         <h1 className='font-black text-black text-lg mb-4'>Comments</h1>
       {/* Head */}

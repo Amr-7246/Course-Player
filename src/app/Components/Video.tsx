@@ -11,8 +11,9 @@ import {
   FaPlay
 } from "react-icons/fa";
 import useStore from "../context/useStore";
+import { useVideo } from "../context/VideoContext";
 
-const Video = () => {
+const Video : React.FC  = () => {
   // * ################################# Start Hooks
   const { dispatch } = useStore();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ const Video = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { isFullScreenForLargeS, setIsFullScreenForLargeS } = useVideo();
   // * ################################# End Hooks
 
   // * ################################# Start Logic
@@ -39,13 +41,11 @@ const Video = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     const handleTimeUpdate = () => {
       if (video.duration) {
         setProgress((video.currentTime / video.duration) * 100);
       }
     };
-
     video.addEventListener("timeupdate", handleTimeUpdate);
     return () => video.removeEventListener("timeupdate", handleTimeUpdate);
   }, []);
@@ -74,7 +74,7 @@ const Video = () => {
     });
   };
 
-  // & Handle fullscreen/rotation toggle using containerRef
+  // & Handle fullscreen/rotation toggle for small screens using containerRef
   const handleExpand = async () => {
     if (containerRef.current) {
       if (!isFullScreen) {
@@ -116,15 +116,14 @@ const Video = () => {
 
   return (
     <div
-      ref={containerRef}
       className={`${
         isPlaying
-          ? "sticky bg-whiterounded-lg duration-500 bg-white top-0"
-          : "relative"
-      } md:mb-10 w-full min-h-[400px] p-5 flex flex-wrap items-center justify-center gap-2 md:col-span-2 row-span-1 row-start-1 row-end-2`}
+          ? "sticky bg-whiterounded-lg duration-500 bg-white top-0" : "relative" } 
+          video ${isFullScreenForLargeS ? 'md:col-span-3 row-span-1 row-start-1 row-end-2' : ' md:col-span-2 row-span-1 row-start-1 row-end-2 ' } `}
     >
       {/* Video Section */}
       <div
+        ref={containerRef}
         className={`group block w-full h-fit md:max-h-[450px] bg-black rounded-md overflow-hidden relative ${
           isRotated ? "transform rotate-90" : ""
         }`}
@@ -143,7 +142,6 @@ const Video = () => {
           />
           Your browser does not support the video tag.
         </video>
-        {/* Video itself */}
         {/* Render custom controls */}
         <>
           {/* Pause/Start button */}
@@ -166,13 +164,18 @@ const Video = () => {
           </div>
           {/* Expand Button */}
           <button
-            onClick={handleExpand}
-            className="md:hidden cursor-pointer absolute bottom-4 right-4 bg-gray-800 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition"
+            onClick={() => {
+              if (isSmallScreen) {
+                handleExpand();
+              } else {
+                setIsFullScreenForLargeS(!isFullScreenForLargeS);
+              }
+            }}
+            className="cursor-pointer absolute bottom-4 right-4 bg-gray-800 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition"
           >
             <FaExpand />
           </button>
         </>
-        {/* Render custom controls */}
       </div>
       {/* Icons section */}
       <div className="flex gap-x-5 w-full justify-start mb-15 md:mb-0 text-stone-800 text-[20px] p-2 rounded-md">
@@ -196,7 +199,6 @@ const Video = () => {
           <FaCrown />
         </span>
       </div>
-      {/* Icons section */}
     </div>
   );
 };

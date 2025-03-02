@@ -26,8 +26,24 @@ body {
 
   /* *########### container */
   .container {
-    @apply bg-white px-2 md:px-10 max-w-[1000px] mx-auto 
-    md:grid md:grid-cols-3 md:auto-rows-auto gap-4;
+    @apply  px-2 md:px-10 max-w-[1000px] mx-auto 
+    md:grid md:grid-cols-3 md:grid-rows-4 md:auto-rows-auto gap-x-4  ;
+  }
+  /* *########### Video */
+  .video {
+    @apply   md:mb-10 w-full p-5 flex flex-wrap items-center justify-center gap-2  ;
+  }
+  /* *########### course-materials */
+  .course-materials {
+    @apply  w-full p-5 col-span-2 col-start-1 col-end-3 row-span-1 row-start-2 row-end-3 ;
+  }
+  /* *########### course-topics */
+  .course-topics {
+    @apply   w-fit px-6 md:px-0 py-6 shadow-lg rounded-lg col-span-1 col-start-3 col-end-4 row-span-4  ;
+  }
+  /* *########### comments */
+  .comments {
+    @apply    w-full col-span-2 col-start-1 col-end-3 row-span-2 row-start-3 row-end-5 p-4 ;
   }
   /* *########### video-icons */
   .video-icons {
