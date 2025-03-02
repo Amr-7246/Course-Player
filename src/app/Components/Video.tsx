@@ -89,7 +89,7 @@ const Video = () => {
     // & Video Custome Config
   // * End Logic
   return (
-    <div className= {` ${ isPlaying ? 'sticky' : '' } md:mb-10  w-full min-h-[400px] p-5 flex flex-wrap items-center justify-center gap-2 md:col-span-2  row-span-1 row-start-1 row-end-2`}>
+    <div className= {` ${ isPlaying ? 'sticky' : 'relative' } md:mb-10  w-full min-h-[400px] p-5 flex flex-wrap items-center justify-center gap-2 md:col-span-2  row-span-1 row-start-1 row-end-2`}>
       {/* Video Section */}
       <div className={` block w-full h-fit md:max-h-[450px] bg-black rounded-md overflow-hidden relative top-0 ${ isRotated ? "transform rotate-90" : "" }`}>
         {/* Video itself */}
@@ -123,26 +123,14 @@ const Video = () => {
       </div>
       {/* Video Section */}
       {/* Icons  */}
-        <div className="flex gap-x-5 text-stone-800 text-[20px] p-2 rounded-md">
-          <span
-            className="video-icons"
-            onClick={() => handleClick("CourseOverview")}
-            data-custom="CourseOverview"
-          >
+        <div className="flex gap-x-5 w-full justify-start mb-7 md:mb-0  text-stone-800 text-[20px] p-2 rounded-md">
+          <span className="video-icons">
             <FaChalkboardTeacher />
           </span>
-          <span
-            className="video-icons"
-            onClick={() => handleClick("Pdf")}
-            data-custom="Pdf"
-          >
+          <span className="video-icons" >
             <FaEnvelopeOpenText />
           </span>
-          <span
-            className="video-icons"
-            onClick={() => handleClick("Exam")}
-            data-custom="Exam"
-          >
+          <span className="video-icons">
             <FaGraduationCap />
           </span>
           <span
@@ -154,8 +142,7 @@ const Video = () => {
           </span>
           <span
             className="video-icons"
-            onClick={() => handleClick("LeaderPopup")}
-            data-custom="LeaderPopup"
+
           >
             <FaCrown />
           </span>

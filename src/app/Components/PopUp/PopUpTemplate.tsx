@@ -42,12 +42,8 @@ const PopUpTemplate = () => {
     // & Select Target PopUp
     // * ################# End Logic 
 return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-800 bg-opacity-90 transition-opacity duration-500">
-        <div className="relative w-full h-full flex items-center justify-center">
-            <div className="transition-transform flex  w-full h-full duration-500 ease-out transform scale-100">
-                {PopupComponent}
-            </div>
-        </div>
+    <div className="fixed min-h-screen inset-0 z-50 flex items-center justify-center bg-stone-800 bg-opacity-90 transition-opacity duration-500">
+        {PopupComponent}
     </div>
   );
 };

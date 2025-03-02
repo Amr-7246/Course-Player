@@ -55,7 +55,7 @@ const Comments = () => {
   return (
     <div className='w-full col-span-2 col-start-1 col-end-3 row-span-1 row-start-3 row-end-4 p-4'>
       <h1 className='font-black text-black text-lg mb-4'>Comments</h1>
-      <div className='h-auto bg-white max-h-[350px] overflow-y-scroll p-4 rounded-lg shadow-lg'>
+      <div className='h-auto bg-white max-h-[450px] overflow-y-scroll p-4 rounded-lg shadow-lg'>
         {comments.map((comment) => (
           <div key={comment.id} className='flex items-start gap-4 mb-4 p-3 border-b last:border-none'>
             <img 

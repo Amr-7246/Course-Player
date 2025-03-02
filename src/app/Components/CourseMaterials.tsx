@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaClock, FaBook, FaUsers } from 'react-icons/fa';
+import { MdLanguage } from "react-icons/md";
+
 
 const CourseMaterials = () => {
   const courses = [
@@ -20,7 +22,7 @@ const CourseMaterials = () => {
           <div key={course.id} className="text-stone-600">
             <p className="flex justify-between items-center gap-2 py-2 border-b last:border-none">
               <div className='flex gap-x-2 items-center'>
-                <FaClock className="text-lg text-teal-700" />
+                <MdLanguage className="text-lg text-teal-700" />
                 <span className="font-bold">Language:</span>
               </div>
               <span>{course.language}</span>
