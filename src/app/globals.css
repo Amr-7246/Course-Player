@@ -26,8 +26,14 @@ body {
 
   /* *########### container */
   .container {
-    @apply bg-white px-2 md:px-10 max-w-[1000px] h-[1200px] mx-auto md:grid md:grid-cols-3 md:grid-rows-3  ;
+    @apply bg-white px-2 md:px-10 max-w-[1000px] mx-auto 
+    md:grid md:grid-cols-3 md:auto-rows-auto gap-4;
   }
+  /* *########### video-icons */
+  .video-icons {
+    @apply flex items-center hover:text-teal-500 duration-500 cursor-pointer 
+}
+
   /* *########### pop-up */
   .pop-up {
     @apply w-[80%] h-[80%] bg-black flex 

@@ -35,21 +35,15 @@ const PopUpTemplate = () => {
         } else if (WhichOppend.trim().toLowerCase() === "pdf") {
             PopupComponent = <PdfPopUp />;
         } else if (WhichOppend.trim().toLowerCase() === "leaderboard") {
-            PopupComponent = <LeaderBoardPopUp />;
+            PopupComponent = <LeaderBoardPopUp onClose={function (): void {
+                throw new Error("Function not implemented.");
+            } }  />;
         }
     // & Select Target PopUp
-    // & Handler for the back button.
-        const handleBack = () => {
-            dispatch({ type: "CLEAR_OPPEND" });
-        };
-    // & Handler for the back button.
     // * ################# End Logic 
 return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-800 bg-opacity-90 transition-opacity duration-500">
         <div className="relative w-full h-full flex items-center justify-center">
-            <button  onClick={handleBack} className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-300">
-                Back
-            </button>
             <div className="transition-transform flex  w-full h-full duration-500 ease-out transform scale-100">
                 {PopupComponent}
             </div>

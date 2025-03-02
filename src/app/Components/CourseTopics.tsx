@@ -65,8 +65,8 @@ const CourseTopics = () => {
     <div className="w-full max-w-2xl mx-auto p-6 shadow-lg rounded-lg col-span-1 col-start-3 col-end-4 row-span-3 row-start-1 row-end-4">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Course Topics</h1>
       {/* Progress Bar */}
-      <div className="w-full bg-gray-200 rounded-full h-3 mb-6">
-        <div className="bg-green-500 h-3 rounded-full transition-all duration-1000 ease-in-out" style={{ width: `${progress}%` }} ></div>
+      <div className="w-full bg-gray-200 rounded-full h-auto mb-6">
+        <div className="bg-green-500 h-1 rounded-full transition-all duration-1000 ease-in-out" style={{ width: `${progress}%` }} ></div>
       </div>
       {/* Progress Bar */}
       {/* Course Topics */}
