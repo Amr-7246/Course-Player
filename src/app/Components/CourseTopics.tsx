@@ -97,12 +97,15 @@ const CourseTopics: React.FC = () => {
                 // * Only for BDF and Exam li 
                 const isClickable = topicIndex === 0 && detail.name;
                 return (
-                  <li  className={`flex items-center gap-2 py-3 border-b border-stone-500 last:border-none text-stone-600 ${ isClickable ? "cursor-pointer hover:text-blue-600" : "" }`}
+                  <li  className={`flex justify-between items-center gap-2 py-3 border-b border-stone-500 last:border-none text-stone-600 ${ isClickable ? "cursor-pointer hover:text-blue-600" : "" }`}
                       key={i} onClick={ isClickable ? () => handleClick(detail.name.trim()) : undefined}
                       data-custom={isClickable ? detail.name.trim() : undefined}
                   >
-                    {detail.icon}
-                    {detail.title}
+                    <span className= "flex items-center gap-1">
+                      {detail.icon}
+                      {detail.title}
+                    </span>
+                    <span className=""><GiPadlock/></span>
                   </li>
                 );
               })}
