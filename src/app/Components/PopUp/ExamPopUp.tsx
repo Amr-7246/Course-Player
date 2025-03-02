@@ -120,16 +120,16 @@ const ExamPopUp = () => {
       {/* Question Navigation */}
 
       {/* Exam Body */}
-      <div className="w-[80%] max-w-[600px] h-[500px] pb-10 mx-auto p-5 bg-white mt-10 text-stone-900 rounded-md">
+      <div className="w-[95%] max-w-[600px] min-h-[500px] pb-10 mx-auto p-5 bg-white mt-10 text-stone-900 rounded-md">
         <span className="block font-black">{questions[currentIndex].id}. </span>
         <span className="flex flex-wrap font-bold">{questions[currentIndex].question}</span>
         <div className="flex items-center justify-center flex-wrap mt-10 gap-4">
           {questions[currentIndex].choices.map(( Ch , i : any ) => (
-            <div onClick={() => setWhichSelected(i) } key={i} className= {` ${ WhichSelected == i ? 'bg-blue-600' : 'bg-white' } cursor-pointer flex hover:bg-blue-600 duration-500 hover:text-stone-800  w-[90%]  shadow-lg rounded-lg shadow-stone-500`}>
+            <div onClick={() => setWhichSelected(i) } key={i} className= {` ${ WhichSelected == i ? 'bg-blue-600' : 'bg-white' } cursor-pointer flex hover:bg-blue-600 duration-500 hover:text-stone-800  w-[95%]  shadow-lg rounded-lg shadow-stone-500`}>
               <span className="border-r border-stone-500 p-5 flex items-center justify-center text-stone-950 hover:text-white duration-300">
                 { WhichSelected == i ?  <MdOutlineRadioButtonChecked/>  : <MdOutlineRadioButtonUnchecked /> }
               </span>
-              <span className="py-2  px-10 font-bold flex items-center text-stone-950">{Ch}</span>
+              <span className="py-2 px-2 font-bold flex justify-center items-center text-stone-950">{Ch}</span>
             </div>
           ))}
         </div>

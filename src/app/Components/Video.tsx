@@ -123,7 +123,7 @@ const Video = () => {
       </div>
       {/* Video Section */}
       {/* Icons  */}
-        <div className="flex gap-x-5 w-full justify-start mb-7 md:mb-0  text-stone-800 text-[20px] p-2 rounded-md">
+        <div className="flex gap-x-5 w-full justify-start mb-15 md:mb-0  text-stone-800 text-[20px] p-2 rounded-md">
           <span className="video-icons">
             <FaChalkboardTeacher />
           </span>
