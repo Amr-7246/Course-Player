@@ -84,9 +84,9 @@ const CourseTopics = () => {
           >
             <h2 className=" flex justify-between items-center text-xl font-semibold text-gray-700 mb-3">
               {topic.week}
-              <div  className=" flex items-center justify-center md:hidden cursor-pointer border border-transparent duration-500 rounded-full w-[30px] h-[30px] hover:border-stone-950 " >
-                <span onClick={ ()=> setIsOppend(!IsOppend) } className= {` ${IsOppend ? 'opacity-0 z-0 absolute ' : 'opacity-1 z-5 ' } duration-500 `} ><FaPlus/></span>
-                <span onClick={ ()=>setIsOppend(!IsOppend) } className= {` ${IsOppend ? 'opacity-1 z-5':'opacity-0 z-0 absolute ' } duration-500 `} ><FaMinus/></span>
+              <div  className=" text-black flex items-center justify-center md:hidden cursor-pointer border border-transparent duration-500 rounded-full w-[30px] h-[30px] hover:border-stone-950 " >
+                <span className= {``} ><FaPlus/></span>
+                {/* <span onClick={ ()=> setIsOppend(!IsOppend) } className= {` ${IsOppend ? 'opacity-1 z-5':'opacity-0 z-0 absolute ' } duration-500 `} ><FaMinus/></span> */}
               </div>
             </h2>
             <ul className="space-y-2">
@@ -112,4 +112,4 @@ const CourseTopics = () => {
   );
 };
 
-export default CourseTopics;
+export default CourseTopics;
