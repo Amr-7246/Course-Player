@@ -62,19 +62,21 @@ const CourseTopics = () => {
     // &  updateing Context state 
   // * Start Logic 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 shadow-lg rounded-lg col-span-1 col-start-3 col-end-4 row-span-3 row-start-1 row-end-4">
+    <div className="w-fit px-6 md:px-0 py-6 shadow-lg rounded-lg col-span-1 col-start-3 col-end-4 row-span-3 row-start-1 row-end-4">
+      {/* header */}
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Course Topics</h1>
+      {/* header */}
       {/* Progress Bar */}
       <div className="w-full bg-gray-200 rounded-full h-auto mb-6">
         <div className="bg-green-500 h-1 rounded-full transition-all duration-1000 ease-in-out" style={{ width: `${progress}%` }} ></div>
       </div>
       {/* Progress Bar */}
       {/* Course Topics */}
-      <div className="grid gap-4">
+      <div className=" flex flex-wrap gap-4">
         {topics.map((topic, topicIndex) => (
           <div
             key={topicIndex}
-            className="bg-white border border-stone-600 w-full p-4 rounded-lg"
+            className="bg-white border border-stone-500 w-full p-4 rounded-lg"
           >
             <h2 className="text-xl font-semibold text-gray-700 mb-3">
               {topic.week}
@@ -84,7 +86,7 @@ const CourseTopics = () => {
                 // * Only for BDF and Exam li 
                 const isClickable = topicIndex === 0 && detail.name;
                 return (
-                  <li  className={`flex items-center gap-2 py-3 border-b border-stone-600 last:border-none text-stone-600 ${ isClickable ? "cursor-pointer hover:text-blue-600" : "" }`}
+                  <li  className={`flex items-center gap-2 py-3 border-b border-stone-500 last:border-none text-stone-600 ${ isClickable ? "cursor-pointer hover:text-blue-600" : "" }`}
                       key={i} onClick={ isClickable ? () => handleClick(detail.name.trim()) : undefined}
                       data-custom={isClickable ? detail.name.trim() : undefined}
                   >
