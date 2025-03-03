@@ -6,7 +6,7 @@ import useStore from "../context/useStore";
 import { useVideo } from "../context/VideoContext";
 
 const CourseTopics: React.FC = () => {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(75);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
   const fakeProgress = 75;
