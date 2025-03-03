@@ -20,28 +20,28 @@ const CourseMaterials = () => {
       <div className="shadow-lg  shadow-stone-500 rounded-lg bg-white w-full min-h-[200px] p-4">
         {courses.map(course => (
           <div key={course.id} className="text-stone-600">
-            <p className="flex justify-between items-center gap-2 py-2 border-b last:border-none">
+            <p className="course-materials-p">
               <div className='flex gap-x-2 items-center'>
                 <MdLanguage className="text-lg text-teal-700" />
                 <span className="font-bold">Language:</span>
               </div>
               <span>{course.language}</span>
             </p>
-            <p className="flex justify-between items-center gap-2 py-2 border-b last:border-none">
+            <p className="course-materials-p">
               <div className='flex gap-x-2 items-center'>
                 <FaClock className="text-lg text-teal-700" />
                 <span className="font-bold">Duration:</span>
               </div>
               <span>{course.duration}</span>
             </p>
-            <p className="flex justify-between items-center gap-2 py-2 border-b last:border-none">
+            <p className="course-materials-p">
               <div className='flex gap-x-2 items-center'>
                 <FaBook className="text-lg text-teal-700" />
                 <span className="font-bold">Lessons:</span>
               </div>
               <span>{course.lessons}</span>
             </p>
-            <p className="flex justify-between items-center gap-2 py-2 border-b last:border-none">
+            <p className="course-materials-p">
               <div className='flex gap-x-2 items-center'>
                 <FaUsers className="text-lg text-teal-700" />
                 <span className="font-bold">Enrolled:</span>
