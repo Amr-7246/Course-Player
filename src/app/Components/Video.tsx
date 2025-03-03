@@ -171,7 +171,7 @@ const Video : React.FC  = () => {
                 setIsFullScreenForLargeS(!isFullScreenForLargeS);
               }
             }}
-            className="cursor-pointer absolute bottom-4 right-4 bg-gray-800 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition"
+            className=" hidden md:flex cursor-pointer absolute bottom-4 right-4 bg-gray-800 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition"
           >
             <FaExpand />
           </button>
