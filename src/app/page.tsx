@@ -8,7 +8,7 @@ import PopUpTemplate from "./Components/PopUp/PopUpTemplate";
 
 export default function Home() {
   return (
-    <>
+  <>
     <Header/>
     <div className = ' container ' >
       <Video/>
@@ -17,6 +17,6 @@ export default function Home() {
       <Comments/>
     </div>
       <PopUpTemplate/>
-    </>
+  </>
   );
 }

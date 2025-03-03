@@ -1,19 +1,11 @@
 import React from 'react';
 import { FaClock, FaBook, FaUsers } from 'react-icons/fa';
 import { MdLanguage } from "react-icons/md";
+import { courses } from '../Data/FakeData';
 
 
 const CourseMaterials = () => {
-  const courses = [
-    {
-      id: 1,
-      language: 'English',
-      duration: '10 weeks',
-      lessons: 20,
-      enrolled: 150,
-    },
-  ];
-
+  
   return (
     <div className="course-materials">
       <h1 className="font-black  text-black mb-4">Course Material</h1>

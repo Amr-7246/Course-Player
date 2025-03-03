@@ -1,14 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
-
-const players = [
-  { name: "Player 1", points: 1000, rank: "🥇" },
-  { name: "Player 2", points: 900, rank: "🥈" },
-  { name: "Player 3", points: 850, rank: "🥉" },
-  { name: "Player 4", points: 780, rank: "4️⃣" },
-  { name: "Player 5", points: 720, rank: "5️⃣" },
-];
+import { players } from "@/app/Data/FakeData";
 
 const LeaderBoardPopUp: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (

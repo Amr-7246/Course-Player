@@ -1,37 +1,10 @@
 'use client'
 import React, { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
+import { FakeComments } from '../Data/FakeData';
 
 const Comments = () => {
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      name: 'John Doe',
-      comment: 'This is an amazing post! Really enjoyed it.',
-      date: '2025-03-01',
-      isAdmin: false,
-      rating: 5,
-      image: 'https://randomuser.me/api/portraits/men/1.jpg'
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      comment: 'Great insights! Looking forward to more content.',
-      date: '2025-02-28',
-      isAdmin: true,
-      rating: 4,
-      image: 'https://randomuser.me/api/portraits/women/2.jpg'
-    },
-    {
-      id: 3,
-      name: 'Alice Johnson',
-      comment: 'I have a different perspective on this topic.',
-      date: '2025-02-27',
-      isAdmin: false,
-      rating: 3,
-      image: 'https://randomuser.me/api/portraits/women/3.jpg'
-    }
-  ]);
+  const [comments, setComments] = useState(FakeComments);
   // * Hooks 
   const [newComment, setNewComment] = useState('');
   // * Hooks 

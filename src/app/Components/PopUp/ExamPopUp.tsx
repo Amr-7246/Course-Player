@@ -8,59 +8,8 @@ import { IoAlarmOutline } from "react-icons/io5";
 import { MdOutlineRadioButtonChecked } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import useStore from "@/app/context/useStore";
+import { questions } from "@/app/Data/FakeData";
 
-const questions = [
-  {
-    id: 1,
-    category: "PHP",
-    question: "What does PHP stand for?",
-    choices: [
-      "Personal Home Page",
-      "PHP: Hypertext Preprocessor",
-      "Preprocessed Hypertext Page",
-      "Private Hosting Protocol",
-    ],
-    answer: "PHP: Hypertext Preprocessor",
-  },
-  {
-    id: 2,
-    category: "JavaScript",
-    question: "What is the difference between == and ===?",
-    choices: [
-      "== checks value, === checks value and type",
-      "Both check value and type",
-      "== checks type, === checks value",
-      "No difference",
-    ],
-    answer: "== checks value, === checks value and type",
-  },
-  {
-    id: 3,
-    category: "React",
-    question: "What is the purpose of useState in React?",
-    choices: [
-      "To manage component state",
-      "To handle API requests",
-      "To create new components",
-      "To define routes",
-    ],
-    answer: "To manage component state",
-  },
-  {
-    id: 4,
-    category: "CSS",
-    question: "Which CSS property is used to make a text bold?",
-    choices: ["font-style", "font-weight", "text-decoration", "text-transform"],
-    answer: "font-weight",
-  },
-  {
-    id: 5,
-    category: "MySQL",
-    question: "Which SQL statement is used to fetch data from a database?",
-    choices: ["FETCH", "SELECT", "GET", "QUERY"],
-    answer: "SELECT",
-  },
-];
 
 const ExamPopUp = () => {
   // * Start Hooks
