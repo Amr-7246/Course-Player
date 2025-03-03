@@ -8,7 +8,6 @@ import { topics } from "../Data/FakeData";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register the plugin
 gsap.registerPlugin(ScrollTrigger);
 
 // * Convert Normal String to JSX Element ( For Icons )
@@ -28,9 +27,10 @@ const CourseTopics: React.FC = () => {
   const { dispatch } = useStore();
   const { isFullScreenForLargeS } = useVideo();
   const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
+  const detailsRefs = useRef<(HTMLUListElement | null)[]>([]);
   // * ################## End Hooks
 
-  // Helper to convert hex color to RGB
+  // & Helper to convert hex color to RGB
   const hexToRgb = (hex: string) => {
     hex = hex.replace(/^#/, '');
     if (hex.length === 3) {
@@ -47,12 +47,12 @@ const CourseTopics: React.FC = () => {
   // Function to compute interpolated color based on current progress
   const getInterpolatedColor = (progressValue: number) => {
     const stops = [
-      { progress: 0, color: "#F43F5E" },    // rose-500
-      { progress: 20, color: "#F97316" },   // orange-500
-      { progress: 80, color: "#8B5CF6" },   // purple-500
-      { progress: 100, color: "#8B5CF6" },  // remain purple-500
-      { progress: 40, color: "#14B8A6" },   // teal-500
-      { progress: 60, color: "#0EA5E9" },   // sky-500
+      { progress: 0, color: "#F43F5E" },    
+      { progress: 20, color: "#F97316" },   
+      { progress: 80, color: "#8B5CF6" },   
+      { progress: 100, color: "#8B5CF6" },  
+      { progress: 40, color: "#14B8A6" },   
+      { progress: 60, color: "#0EA5E9" },   
     ];
 
     if (progressValue <= stops[0].progress) return stops[0].color;
@@ -97,14 +97,14 @@ const CourseTopics: React.FC = () => {
     // Animate the width of the inner progress bar from 0 to fakeProgress%
     tl.to(progressBarInnerRef.current, {
       width: `${fakeProgress}%`,
-      duration: 2,
+      duration: 3,
       ease: "power1.out"
     });
 
     // Animate a dummy value to update the progress state and background color
     tl.to({ val: 0 }, {
       val: fakeProgress,
-      duration: 1,
+      duration: 3,
       ease: "power1.out",
       onUpdate: function() {
         const currentVal = Math.round(this.targets()[0].val);
@@ -113,21 +113,27 @@ const CourseTopics: React.FC = () => {
           progressBarInnerRef.current.style.backgroundColor = getInterpolatedColor(currentVal);
         }
       }
-    }, 0); // starting both animations at the same time
+    }, 0); 
 
     return () => {
-      // Clean up any ScrollTrigger instances when component unmounts
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
   // * ################## End Animation Logic
 
-  // & Toggle the open state of a specific card
+  // & Toggle the open state of a specific card with smooth GSAP animation
   const handleCardToggle = (index: number) => {
-    setOpenCards((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
+    const isOpen = openCards[index];
+    setOpenCards((prev) => ({ ...prev, [index]: !prev[index] }));
+    const detailsEl = detailsRefs.current[index];
+    if (!detailsEl) return;
+    if (!isOpen) {
+      // Expand: animate height from 0 to auto and fade in
+      gsap.to(detailsEl, { height: "auto", opacity: 1, duration: 0.5, ease: "power1.out" });
+    } else {
+      // Collapse: animate height to 0 and fade out
+      gsap.to(detailsEl, { height: 0, opacity: 0, duration: 0.5, ease: "power1.out" });
+    }
   };
 
   // & Open PopUp plugines
@@ -149,7 +155,7 @@ const CourseTopics: React.FC = () => {
         <div
           ref={progressBarInnerRef}
           className="h-1 rounded-full"
-          style={{ width: "0%" }} // backgroundColor will be set dynamically
+          style={{ width: "0%" }} 
         ></div>
       </div>
       <div className="text-sm text-gray-700 mb-6 text-center flex items-center justify-center">
@@ -162,15 +168,25 @@ const CourseTopics: React.FC = () => {
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold text-gray-700 mb-1">{topic.week}</h2>
               <div
-                className="md:hidden text-stone-800 cursor-pointer border border-transparent duration-500 rounded-full w-[30px] h-[30px] flex items-center justify-center"
+                className="md:hidden text-stone-800 cursor-pointer border border-transparent duration-500 rounded-full w-[30px] h-[30px] flex items-center justify-center transition-all ease-in-out"
                 onClick={() => handleCardToggle(topicIndex)}
               >
                 {openCards[topicIndex] ? <FaMinus /> : <FaPlus />}
               </div>
             </div>
             <p className="text-gray-600 mb-3">{topic.description}</p>
-            {/* Details: show only if open on small screens, always show on md+ */}
-            <ul className={`${openCards[topicIndex] ? "block" : "hidden"} md:block space-y-2`}>
+            {/* Details: always rendered but animated on mobile */}
+            <ul
+              ref={(el) => {
+                detailsRefs.current[topicIndex] = el;
+                // Set initial style for closed cards on mount
+                if (el && !openCards[topicIndex]) {
+                  gsap.set(el, { height: 0, opacity: 0 });
+                }
+              }}
+              className="space-y-2 md:block"
+              style={{ overflow: "hidden" }}
+            >
               {topic.details.map((detail, i) => {
                 const isClickable = topicIndex === 0 && detail.name;
                 return (
