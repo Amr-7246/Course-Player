@@ -8,10 +8,12 @@ import {
   FaCrown,
   FaExpand, 
   FaPause,
-  FaPlay
+  FaPlay,
+  FaCommentDots
 } from "react-icons/fa";
 import useStore from "../context/useStore";
 import { useVideo } from "../context/VideoContext";
+import { BsPatchQuestionFill } from "react-icons/bs";
 
 const Video : React.FC  = () => {
 // * ################################# Start Hooks
@@ -158,18 +160,26 @@ const Video : React.FC  = () => {
           <span className="video-icons">
             <FaChalkboardTeacher />
           </span>
-          <span className="video-icons">
-            <FaEnvelopeOpenText />
+          <span 
+            className="video-icons cursor-pointer "
+            onClick={() => {
+              const commentsSection = document.getElementById('comments-section');
+              if (commentsSection) {
+                commentsSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }} 
+          >
+            <FaCommentDots />
           </span>
           <span className="video-icons">
             <FaGraduationCap />
           </span>
           <span
-            className="video-icons"
+            className="video-icons cursor-pointer "
             onClick={() => handleClick("AskQ")}
             data-custom="AskQ"
           >
-            <FaQuestionCircle />
+            <BsPatchQuestionFill />
           </span>
           <span className="video-icons">
             <FaCrown />

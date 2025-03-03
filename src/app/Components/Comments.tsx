@@ -4,14 +4,13 @@ import { AiFillStar } from 'react-icons/ai';
 import { FakeComments } from '../Data/FakeData';
 
 const Comments = () => {
+// * ################ Start Hooks 
   const [comments, setComments] = useState(FakeComments);
-  // * Hooks 
   const [newComment, setNewComment] = useState('');
-  // * Hooks 
-  // * logic 
+// * ################ End Hooks 
+// * ################ Start logic 
   const addComment = () => {
     if (!newComment.trim()) return;
-    
     const fakeUser = {
       id: comments.length + 1,
       name: 'Guest User',
@@ -21,13 +20,13 @@ const Comments = () => {
       rating: 3 ,
       image: 'https://randomuser.me/api/portraits/lego/1.jpg'
     };
-
     setComments([fakeUser, ...comments]);
     setNewComment('');
   };
-  // * logic 
+// * ################ End logic 
+// * ################ Start Elementes 
   return (
-    <div className='comments'>
+    <div id="comments-section"  className='comments'>
       {/* Head */}
         <h1 className='font-black text-black text-lg mb-4'>Comments</h1>
       {/* Head */}
@@ -78,5 +77,6 @@ const Comments = () => {
     </div>
   );
 };
+// * ################ End Elementes 
 
 export default Comments;

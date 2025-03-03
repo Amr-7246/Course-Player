@@ -51,7 +51,7 @@ body {
   }
   /* *########### video-icons */
   .video-icons {
-    @apply flex items-center justify-center hover:text-teal-500 duration-500 cursor-pointer border border-stone-600 w-[42px] h-[42px] rounded-full 
+    @apply flex items-center justify-center hover:text-teal-500 duration-500  border border-stone-600 w-[42px] h-[42px] rounded-full 
 }
 
   /* *########### pop-up */
