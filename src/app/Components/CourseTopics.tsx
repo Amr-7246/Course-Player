@@ -6,6 +6,7 @@ import useStore from "../context/useStore";
 import { useVideo } from "../context/VideoContext";
 import { topics } from "../Data/FakeData";
 
+// * Conert Normal String to JSX Element ( For Icons )
 const iconMap: Record<string, JSX.Element> = {
   FaPlayCircle: <FaPlayCircle />,
   FaBook: <FaBook />,
