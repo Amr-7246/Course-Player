@@ -39,7 +39,7 @@ body {
   }
   /* *########### course-topics */
   .course-materials-p {
-    @apply flex justify-between items-center gap-2 md:py-4  border-b last:border-none
+    @apply flex justify-between items-center gap-2 md:py-4 py-2 border-b last:border-none
   }
   /* *########### course-topics */
   .course-topics {
