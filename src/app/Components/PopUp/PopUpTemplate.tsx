@@ -7,11 +7,11 @@ import LeaderBoardPopUp from "./LeaderBoardPopUp";
 import useStore from "../../context/useStore";
 
 const PopUpTemplate = () => {
-    // *  ################# Start State
+// *  ################# Start State
     const { state, dispatch } = useStore();
     const { IsOppend, WhichOppend } = state;
-    // *  ################# End State
-    // *  ################# Start Logic 
+// *  ################# End State
+// *  ################# Start Logic 
     // & Disable scrolling when popup is open
         useEffect(() => {
             if (IsOppend) {
@@ -26,8 +26,7 @@ const PopUpTemplate = () => {
     // & Disable scrolling when popup is open
     // & Select Target PopUp
         if (!IsOppend) return null;
-
-        let PopupComponent = null;
+            let PopupComponent = null;
         if (WhichOppend.trim().toLowerCase() === "exam" || WhichOppend.trim().toLowerCase() === "exame") {
             PopupComponent = <ExamPopUp />;
         } else if (WhichOppend.trim().toLowerCase() === "askq") {
@@ -37,15 +36,15 @@ const PopUpTemplate = () => {
         } else if (WhichOppend.trim().toLowerCase() === "leaderboard") {
             PopupComponent = <LeaderBoardPopUp onClose={function (): void {
                 throw new Error("Function not implemented.");
-            } }  />;
+            }}/>;
         }
     // & Select Target PopUp
-    // * ################# End Logic 
+// * ################# End Logic 
 return (
     <div className="fixed min-h-screen inset-0 z-50 flex items-center justify-center bg-stone-800 bg-opacity-90 transition-opacity duration-500">
         {PopupComponent}
     </div>
-  );
+);
 };
 
 export default PopUpTemplate;

@@ -12,35 +12,33 @@ import { questions } from "@/app/Data/FakeData";
 
 
 const ExamPopUp = () => {
-  // * Start Hooks
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(60);
-    const [WhichSelected, setWhichSelected] = useState(null);
-  // * End Hooks
-  // * Start Logic
-    // & timer
-      useEffect(() => {
-        if (timeLeft <= 0) return;
-
-        const timer = setInterval(() => {
-          setTimeLeft((prev) => prev - 1);
-        }, 1000);
-        return () => clearInterval(timer);
-      }, [timeLeft]);
-    // & timer
-    // & Handler for the back button.
-      const { state, dispatch } = useStore();
-      const handleBack = () => {
-        dispatch({ type: "CLEAR_OPPEND" });
-      };
-    // & Handler for the back button.
-    // & Handler for the Q Toggle
-      const handleQuestionClick = (index : any ) => {
-        setCurrentIndex(index);
-      };
-    // & Handler for the Q Toggle
-  // * End Logic
-
+// * Start Hooks
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [WhichSelected, setWhichSelected] = useState(null);
+// * End Hooks
+// * Start Logic
+  // & timer
+    useEffect(() => {
+      if (timeLeft <= 0) return;
+      const timer = setInterval(() => {
+        setTimeLeft((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }, [timeLeft]);
+  // & timer
+  // & Handler for the back button.
+    const { state, dispatch } = useStore();
+    const handleBack = () => {
+      dispatch({ type: "CLEAR_OPPEND" });
+    };
+  // & Handler for the back button.
+  // & Handler for the Q Toggle
+    const handleQuestionClick = (index : any ) => {
+      setCurrentIndex(index);
+    };
+  // & Handler for the Q Toggle
+// * End Logic
   return (
     <div className=" w-full h-screen overflow-y-scroll flex flex-wrap items-center justify-center bg-blue-700 p-4">
       {/* Exam Head */}
