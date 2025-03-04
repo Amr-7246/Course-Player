@@ -19,7 +19,7 @@ const iconMap: Record<string, JSX.Element> = {
 };
 
 const CourseTopics: React.FC = () => {
-  // * ################## Start Hooks
+  // * ################################# Start Hooks
   const [progress, setProgress] = useState(0);
   const fakeProgress = 93; 
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -28,8 +28,9 @@ const CourseTopics: React.FC = () => {
   const { isFullScreenForLargeS } = useVideo();
   const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
   const detailsRefs = useRef<(HTMLUListElement | null)[]>([]);
-  // * ################## End Hooks
+  // * ################################# End Hooks
 
+  // * ################################# Start Helper Functions
   // & Helper to convert hex color to RGB
   const hexToRgb = (hex: string) => {
     hex = hex.replace(/^#/, '');
@@ -81,48 +82,74 @@ const CourseTopics: React.FC = () => {
 
     return `rgb(${r}, ${g}, ${b})`;
   };
+  // * ################################# End Helper Functions
 
-  // * ################## Start Animation Logic using GSAP ScrollTrigger
+  // * ################################# Start Animation Logic using GSAP ScrollTrigger
   useEffect(() => {
     if (!progressBarRef.current || !progressBarInnerRef.current) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: progressBarRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    // Animate the width of the inner progress bar from 0 to fakeProgress%
-    tl.to(progressBarInnerRef.current, {
-      width: `${fakeProgress}%`,
-      duration: 3,
-      ease: "power1.out"
-    });
-
-    // Animate a dummy value to update the progress state and background color
-    tl.to({ val: 0 }, {
-      val: fakeProgress,
-      duration: 3,
-      ease: "power1.out",
-      onUpdate: function() {
-        const currentVal = Math.round(this.targets()[0].val);
-        setProgress(currentVal);
-        if (progressBarInnerRef.current) {
-          progressBarInnerRef.current.style.backgroundColor = getInterpolatedColor(currentVal);
+    if (window.innerWidth >= 768) {
+      // For md+ screens, animate progress bar immediately (do not wait for scroll trigger)
+      const tl = gsap.timeline();
+      tl.to(progressBarInnerRef.current, {
+        width: `${fakeProgress}%`,
+        duration: 3,
+        ease: "power1.out"
+      });
+      tl.to({ val: 0 }, {
+        val: fakeProgress,
+        duration: 3,
+        ease: "power1.out",
+        onUpdate: function() {
+          const currentVal = Math.round(this.targets()[0].val);
+          setProgress(currentVal);
+          if (progressBarInnerRef.current) {
+            progressBarInnerRef.current.style.backgroundColor = getInterpolatedColor(currentVal);
+          }
         }
-      }
-    }, 0); 
+      }, 0);
+    } else {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: progressBarRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animate the width of the inner progress bar from 0 to fakeProgress%
+      tl.to(progressBarInnerRef.current, {
+        width: `${fakeProgress}%`,
+        duration: 3,
+        ease: "power1.out"
+      });
+
+      // Animate a dummy value to update the progress state and background color
+      tl.to({ val: 0 }, {
+        val: fakeProgress,
+        duration: 3,
+        ease: "power1.out",
+        onUpdate: function() {
+          const currentVal = Math.round(this.targets()[0].val);
+          setProgress(currentVal);
+          if (progressBarInnerRef.current) {
+            progressBarInnerRef.current.style.backgroundColor = getInterpolatedColor(currentVal);
+          }
+        }
+      }, 0);
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
-  // * ################## End Animation Logic
+  // * ################################# End Animation Logic
 
+  // * ################################# Start Handlers
   // & Toggle the open state of a specific card with smooth GSAP animation
   const handleCardToggle = (index: number) => {
+    // For md screens, cards are always open
+    if (window.innerWidth >= 768) return;
     const isOpen = openCards[index];
     setOpenCards((prev) => ({ ...prev, [index]: !prev[index] }));
     const detailsEl = detailsRefs.current[index];
@@ -146,7 +173,9 @@ const CourseTopics: React.FC = () => {
       },
     });
   };
+  // * ################################# End Handlers
 
+  // * ################################# Start JSX Elementes
   return (
     <div className={`course-topics ${isFullScreenForLargeS ? 'row-start-2 row-end-5' : 'row-start-1 row-end-5'}`}>
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Course Topics</h1>
@@ -179,9 +208,12 @@ const CourseTopics: React.FC = () => {
             <ul
               ref={(el) => {
                 detailsRefs.current[topicIndex] = el;
-                // Set initial style for closed cards on mount
-                if (el && !openCards[topicIndex]) {
-                  gsap.set(el, { height: 0, opacity: 0 });
+                if (el) {
+                  if (window.innerWidth >= 768) {
+                    gsap.set(el, { height: "auto", opacity: 1 });
+                  } else if (!openCards[topicIndex]) {
+                    gsap.set(el, { height: 0, opacity: 0 });
+                  }
                 }
               }}
               className="space-y-2 md:block"
@@ -214,6 +246,7 @@ const CourseTopics: React.FC = () => {
       {/* Course Topics */}
     </div>
   );
+  // * ################################# End JSX Elementes
 };
 
 export default CourseTopics;

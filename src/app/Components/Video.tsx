@@ -21,8 +21,9 @@ const Video : React.FC  = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isRotated, setIsRotated] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  // Added state for controlling the pause icon fade-out
+  const [showPauseIcon, setShowPauseIcon] = useState(true);
   const [progress, setProgress] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { isFullScreenForLargeS, setIsFullScreenForLargeS } = useVideo();
@@ -56,9 +57,7 @@ const Video : React.FC  = () => {
       const handleFullScreenChange = () => {
         const fsElement = document.fullscreenElement;
         setIsFullScreen(!!fsElement);
-        if (!fsElement && isSmallScreen) {
-          setIsRotated(true);
-        }
+        // Removed rotation logic
       };
       document.addEventListener("fullscreenchange", handleFullScreenChange);
       return () => document.removeEventListener("fullscreenchange", handleFullScreenChange);
@@ -81,9 +80,6 @@ const Video : React.FC  = () => {
         if (!isFullScreen) {
           try {
             await containerRef.current.requestFullscreen();
-            if (isSmallScreen) {
-              setIsRotated(true);
-            }
             setIsFullScreen(true);
           } catch (error) {
             console.error("Error entering full screen:", error);
@@ -91,11 +87,6 @@ const Video : React.FC  = () => {
         } else {
           if (document.fullscreenElement) {
             await document.exitFullscreen();
-            if (isSmallScreen) {
-              setIsRotated(true);
-            } else {
-              setIsRotated(false);
-            }
             setIsFullScreen(false);
           }
         }
@@ -106,11 +97,17 @@ const Video : React.FC  = () => {
     const handleTogglePlay = () => {
       if (!videoRef.current) return;
       if (videoRef.current.paused) {
+        // When playing, ensure pause icon is visible immediately
+        setShowPauseIcon(true);
         videoRef.current.play();
         setIsPlaying(true);
       } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
+        // When clicked while playing, fade out the pause icon smoothly before pausing
+        setShowPauseIcon(false);
+        setTimeout(() => {
+          videoRef.current?.pause();
+          setIsPlaying(false);
+        }, 300); // 300ms matches the transition duration below
       }
     };
   // & Toggle play/pause button
@@ -119,7 +116,7 @@ const Video : React.FC  = () => {
   return (
     <div className={`${ isPlaying ? "sticky bg-whiterounded-lg duration-500 bg-white top-0" : "relative" }  video ${isFullScreenForLargeS ? 'md:col-span-3 row-span-1 row-start-1 row-end-2' : ' md:col-span-2 row-span-1 row-start-1 row-end-2 ' } `} >
       {/* Video Section */}
-      <div ref={containerRef} className={`group block w-full h-fit md:max-h-[450px] bg-black rounded-md overflow-hidden relative ${ isRotated ? "transform rotate-90" : "" }`} >
+      <div ref={containerRef} className="group block w-full h-fit md:max-h-[450px] bg-black rounded-md overflow-hidden relative" >
         {/* Video itself */}
           <video playsInline controls={false} ref={videoRef} className="w-full h-full object-cover" onClick={handleTogglePlay} >
             <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4" />
@@ -129,8 +126,14 @@ const Video : React.FC  = () => {
         {/* Render custom controls */}
           <>
             {/* Pause/Start button */}
-              <button onClick={handleTogglePlay} className="absolute inset-0 flex items-center justify-center text-white text-6xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"> 
-                {isPlaying ? (  <FaPause className="cursor-pointer" />  ) : (  <FaPlay className="cursor-pointer" />  )}
+              <button onClick={handleTogglePlay} className="absolute inset-0 flex items-center justify-center text-white text-6xl transition-opacity duration-300">
+                {isPlaying ? (
+                  <span className={`cursor-pointer transition-opacity duration-300 ${showPauseIcon ? "opacity-100" : "opacity-0"}`}>
+                    <FaPause />
+                  </span>
+                ) : (
+                  <FaPlay className="cursor-pointer" />
+                )}
               </button>
             {/* Pause/Start button */}
             {/* Progress Bar */}
@@ -147,7 +150,7 @@ const Video : React.FC  = () => {
                     setIsFullScreenForLargeS(!isFullScreenForLargeS);
                   }
                 }}
-                className=" hidden md:flex cursor-pointer absolute bottom-4 right-4 bg-gray-800 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition"
+                className="flex cursor-pointer absolute bottom-4 right-4 bg-stone-900 bg-opacity-70 text-stone-300 p-2 rounded-full hover:bg-opacity-90 transition duration-300 hover:scale-105"
               >
                 <FaExpand />
               </button>
